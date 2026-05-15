@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSG Pune Pariwar Indoor Games</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <div class="nav-logo">
+                <span class="logo-text">JSG Pune Pariwar</span>
+            </div>
+
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#events" class="nav-link">Events</a>
+                <a href="#register" class="nav-link">Register</a>
+                <a href="/admin.html" class="nav-link btn-admin">Admin</a>
+            </div>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+
+        <div class="hero-content">
+
+            <h1 class="hero-title">
+                JSG Pune Pariwar
+                <br>
+                <span class="gold">Indoor Games Tournament</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Join the excitement and participate in our premium indoor sports tournament
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#register" class="btn btn-primary btn-large">
+                    Register Now
+                </a>
+
+                <a href="#events" class="btn btn-outline">
+                    View Events
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Events -->
+    <section id="events" class="events">
+
+        <div class="container">
+
+            <h2 class="section-title">Tournament Events</h2>
+
+            <!-- 12 JULY -->
+            <div class="event-card">
+
+                <div class="event-date">
+                    <h3>12 July 2026</h3>
+                    <div class="venue">
+                        Metrocity Sports Club, Kothrud
+                    </div>
+                </div>
+
+                <div class="event-sports">
+
+                    <h4>Select ANY 2 Sports:</h4>
+
+                    <div class="sports-grid">
+
+                        <label class="sport-item july12">
+                            <input type="checkbox" name="july12[]" value="Table Tennis">
+
+                            <span style="color:#2563eb; font-weight:700; font-size:18px;">
+                                🏓 Table Tennis
+                            </span>
+                        </label>
+
+                        <label class="sport-item july12">
+                            <input type="checkbox" name="july12[]" value="Pickle Ball">
+
+                            <span style="color:#16a34a; font-weight:700; font-size:18px;">
+                                🟢 Pickle Ball
+                            </span>
+                        </label>
+
+                        <label class="sport-item july12">
+                            <input type="checkbox" name="july12[]" value="Swimming - Freestyle">
+
+                            <span style="color:#0ea5e9; font-weight:700; font-size:18px;">
+                                🏊 Swimming
+                            </span>
+                        </label>
+
+                    </div>
+
+                    <div class="sport-count" id="july12-count">
+                        0/2 selected
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- 19 JULY -->
+            <div class="event-card">
+
+                <div class="event-date">
+                    <h3>19 July 2026</h3>
+
+                    <div class="venue">
+                        Downtown Sports Arena, Gangadham Kondhwa Road
+                    </div>
+                </div>
+
+                <div class="event-sports">
+
+                    <h4>Select ANY 2 Sports:</h4>
+
+                    <div class="sports-grid">
+
+                        <label class="sport-item july19">
+                            <input type="checkbox" name="july19[]" value="Badminton">
+
+                            <span style="color:#f59e0b; font-weight:700; font-size:18px;">
+                                🏸 Badminton
+                            </span>
+                        </label>
+
+                        <label class="sport-item july19">
+                            <input type="checkbox" name="july19[]" value="Chess">
+
+                            <span style="color:#111827; font-weight:700; font-size:18px;">
+                                ♟ Chess
+                            </span>
+                        </label>
+
+                        <label class="sport-item july19">
+                            <input type="checkbox" name="july19[]" value="Carrom">
+
+                            <span style="color:#dc2626; font-weight:700; font-size:18px;">
+                                🔴 Carrom
+                            </span>
+                        </label>
+
+                    </div>
+
+                    <div class="sport-count" id="july19-count">
+                        0/2 selected
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Registration -->
+    <section id="register" class="register">
+
+        <div class="container">
+
+            <div class="form-container">
+
+                <h2 class="section-title">
+                    Registration Form
+                </h2>
+
+                <form id="registrationForm" class="register-form">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" name="fullName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Age *</label>
+                            <input type="number" name="age" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Gender *</label>
+
+                            <select name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mobile Number *</label>
+                            <input type="tel" name="mobile" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>City *</label>
+                            <input type="text" name="city" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>JSG Group Name *</label>
+                            <input type="text" name="jsgGroup" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Emergency Contact *</label>
+                            <input type="tel" name="emergencyContact" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Medical Conditions</label>
+
+                            <textarea
+                                name="medicalConditions"
+                                rows="3"
+                                placeholder="Optional"
+                            ></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button type="submit" class="btn btn-primary btn-large">
+
+                            <span class="btn-text">
+                                Register Now
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+
+        <div class="modal-content">
+
+            <i class="fas fa-check-circle success-icon"></i>
+
+            <h3>Registration Successful!</h3>
+
+            <p>
+                Thank you for registering for JSG Pune Pariwar Indoor Games.
+            </p>
+
+            <a href="/" class="btn btn-primary">
+                Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="container">
+
+            <p>
+                © 2026 JSG Pune Pariwar Indoor Games
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
