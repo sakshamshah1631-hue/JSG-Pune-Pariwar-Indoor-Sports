@@ -1,6 +1,154 @@
-// Export Data to Excel Sheet
-app.get('/api/admin/export', async (req, res) => {
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const mongoose = require('mongoose');
+const ExcelJS = require('exceljs');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+const MONGODB_URI = 'mongodb+srv://sakshamshah1631_db_user:gl93d8p9W7prg3PL@cluster0.efp3ibc.mongodb.net/?appName=Cluster0';
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Static files
+app.use(express.static(path.join(__dirname, '')));
+
+mongoose.set('strictQuery', false);
+
+// MongoDB Connection
+mongoose.connect(MONGODB_URI)
+  .then(() => console.log('MongoDB connected successfully'))
+  .catch((err) => console.error('MongoDB connection error:', err));
+
+// Schema
+const registrationSchema = new mongoose.Schema({
+  fullName: { type: String, required: true },
+  age: { type: String, required: true },
+  gender: { type: String, required: true },
+  mobile: { type: String, required: true },
+  email: { type: String, required: false },
+  city: { type: String, required: true },
+  jsgGroup: { type: String, required: true },
+
+  emergencyContact: {
+    type: String,
+    default: 'N/A'
+  },
+
+  medicalConditions: {
+    type: String,
+    default: 'None'
+  },
+
+  july12Sports: [
+    {
+      sportName: String,
+      ageCategory: String,
+    }
+  ],
+
+  july19Sports: [
+    {
+      sportName: String,
+      ageCategory: String,
+    }
+  ],
+
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+const Registration = mongoose.model('Registration', registrationSchema);
+
+// Admin Login
+app.post('/api/admin/login', async (req, res) => {
+
+  const { username, password } = req.body;
+
+  const ADMIN_USERNAME = 'admin';
+  const ADMIN_PASSWORD = 'password123';
+
+  if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+
+    res.json({
+      success: true,
+      message: 'Login successful'
+    });
+
+  } else {
+
+    res.json({
+      success: false,
+      message: 'Invalid credentials'
+    });
+  }
+});
+
+// Submit Registration
+app.post('/api/register', async (req, res) => {
+
   try {
+
+    const registration = new Registration({
+      ...req.body,
+      createdAt: new Date(),
+    });
+
+    await registration.save();
+
+    console.log('New Registration Saved');
+
+    res.status(201).json({
+      success: true,
+      message: 'Registration saved successfully'
+    });
+
+  } catch (error) {
+
+    console.error('Error saving registration:', error);
+
+    res.status(500).json({
+      success: false,
+      message: 'Server error'
+    });
+  }
+});
+
+// Fetch All Registrations
+app.get('/api/admin/registrations', async (req, res) => {
+
+  try {
+
+    const registrations = await Registration.find()
+      .sort({ createdAt: -1 })
+      .lean();
+
+    res.json({
+      success: true,
+      data: registrations
+    });
+
+  } catch (error) {
+
+    console.error('Error fetching registrations:', error);
+
+    res.status(500).json({
+      success: false,
+      message: 'Unable to fetch registrations'
+    });
+  }
+});
+
+// Export Excel
+app.get('/api/admin/export', async (req, res) => {
+
+  try {
+
     const registrations = await Registration.find()
       .sort({ createdAt: -1 })
       .lean();
@@ -80,7 +228,6 @@ app.get('/api/admin/export', async (req, res) => {
       to: 'L1'
     };
 
-    // Response headers
     res.setHeader(
       'Content-Type',
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
@@ -96,7 +243,24 @@ app.get('/api/admin/export', async (req, res) => {
     res.end();
 
   } catch (error) {
+
     console.error('Export Error:', error);
+
     res.status(500).send('Error generating spreadsheet report');
   }
+});
+
+// Fallback Route
+app.use((req, res, next) => {
+
+  if (req.method === 'GET' && !req.path.startsWith('/api')) {
+    return res.sendFile(path.join(__dirname, 'index.html'));
+  }
+
+  next();
+});
+
+// Start Server
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

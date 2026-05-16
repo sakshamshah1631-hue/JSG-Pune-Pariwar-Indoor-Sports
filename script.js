@@ -97,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function () {
             age: form.age.value,
             gender: form.gender.value,
             mobile: form.mobile.value,
-            email: form.email.value,
             city: form.city.value,
             jsgGroup: form.jsgGroup.value,
             emergencyContact: form.emergencyContact.value || 'N/A', 
