@@ -24,12 +24,12 @@ document.addEventListener('DOMContentLoaded', function () {
         input.addEventListener('change', function () {
             const container = this.closest('.sport-item');
             const isJuly12 = container.classList.contains('july12');
-            
-            updateSportCounts(isJuly12 ? 'july12' : 'july19', isJuly12 ? july12Count : july19Count);
+            const currentGroup = isJuly12 ? 'july12' : 'july19';
+            const currentCounter = isJuly12 ? july12Count : july19Count;
 
             const ageGroupContainer = container.querySelector('.sport-age-group');
             const ageSelect = ageGroupContainer.querySelector('select');
-            
+
             if (this.checked) {
                 ageGroupContainer.style.display = 'block';
                 ageSelect.required = true;
@@ -38,6 +38,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 ageSelect.required = false;
                 ageSelect.value = ''; 
             }
+
+            const selectedInGroup = Array.from(document.querySelectorAll(`.${currentGroup} input[type="checkbox"]:checked`));
+            if (selectedInGroup.length > 2) {
+                const deselectInput = selectedInGroup[1];
+                deselectInput.checked = false;
+                const deselectContainer = deselectInput.closest('.sport-item');
+                const deselectAgeGroup = deselectContainer.querySelector('.sport-age-group');
+                const deselectAgeSelect = deselectAgeGroup.querySelector('select');
+                deselectAgeGroup.style.display = 'none';
+                deselectAgeSelect.required = false;
+                deselectAgeSelect.value = '';
+            }
+
+            updateSportCounts(currentGroup, currentCounter);
         });
     });
 
