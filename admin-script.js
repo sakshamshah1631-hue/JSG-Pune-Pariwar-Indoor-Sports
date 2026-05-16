@@ -1,85 +1,82 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const loginSection = document.getElementById('loginSection');
-    const dashboardSection = document.getElementById('dashboardSection');
+document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const totalRegistrationsEl = document.getElementById('totalRegistrations');
-    const registrationsTableBody = document.querySelector('#registrationsTable tbody');
-    
-    // Login
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        
-        try {
-            const response = await fetch('/api/admin/login', {
+    const loginSection = document.getElementById('login-section');
+    const dashboardSection = document.getElementById('dashboard-section');
+    const tableBody = document.getElementById('registrationTableBody');
+
+    // Handle Login
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const res = await fetch('/api/admin/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
             });
-            
-            const result = await response.json();
-            
+
+            const result = await res.json();
             if (result.success) {
-                localStorage.setItem('adminLoggedIn', 'true');
-                loadDashboard();
+                loginSection.style.display = 'none';
+                dashboardSection.style.display = 'block';
+                loadData();
             } else {
-                alert('Invalid credentials!');
+                alert("Invalid Username or Password!");
             }
-        } catch (error) {
-            alert('Login failed. Please try again.');
-        }
-    });
-    
-    // Check if already logged in
-    if (localStorage.getItem('adminLoggedIn') === 'true') {
-        loadDashboard();
-    }
-    
-    async function loadDashboard() {
-        try {
-            const response = await fetch('/api/admin/registrations');
-            const data = await response.json();
-            
-            totalRegistrationsEl.textContent = data.total;
-            populateTable(data.registrations);
-            
-            loginSection.style.display = 'none';
-            dashboardSection.style.display = 'block';
-        } catch (error) {
-            localStorage.removeItem('adminLoggedIn');
-            alert('Session expired. Please login again.');
-        }
-    }
-    
-    function populateTable(registrations) {
-        registrationsTableBody.innerHTML = '';
-        
-        registrations.slice(-10).reverse().forEach(reg => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${reg.id}</td>
-                <td>${reg.fullName}</td>
-                <td>${reg.mobile}</td>
-                <td>${reg.age}</td>
-                <td>${reg.jsgGroup}</td>
-                <td>${reg.july12Sports?.join(', ') || 'None'}</td>
-                <td>${reg.july19Sports?.join(', ') || 'None'}</td>
-                <td>${new Date(reg.timestamp).toLocaleString()}</td>
-            `;
-            registrationsTableBody.appendChild(row);
         });
     }
-    
-    // Logout
-    logoutBtn.addEventListener('click', () => {
-        localStorage.removeItem('adminLoggedIn');
-        loginSection.style.display = 'flex';
-        dashboardSection.style.display = 'none';
-        loginForm.reset();
-    });
-    
-    // Auto-refresh table every 30 seconds
-    setInterval(loadDashboard, 30000);
+
+    // Load table data
+    async function loadData() {
+        const res = await fetch('/api/admin/registrations');
+        const result = await res.json();
+        if (result.success && tableBody) {
+            tableBody.innerHTML = result.data.map((reg, i) => `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${reg.fullName}</td>
+                    <td>${reg.mobile}</td>
+                    <td>${reg.jsgGroup}</td>
+                </tr>
+            `).join('');
+        }
+    }
+
+    // Handle Export to Excel
+    const exportBtn = document.getElementById('exportBtn');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', async () => {
+            try {
+                exportBtn.textContent = '⏳ Exporting...';
+                exportBtn.disabled = true;
+                
+                const response = await fetch('/api/admin/export');
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `JSG_Registrations_${new Date().toISOString().split('T')[0]}.xlsx`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(url);
+                    
+                    exportBtn.textContent = '📥 Export to Excel';
+                    exportBtn.disabled = false;
+                } else {
+                    alert('Error exporting data!');
+                    exportBtn.textContent = '📥 Export to Excel';
+                    exportBtn.disabled = false;
+                }
+            } catch (error) {
+                console.error('Export Error:', error);
+                alert('Failed to export data!');
+                exportBtn.textContent = '📥 Export to Excel';
+                exportBtn.disabled = false;
+            }
+        });
+    }
 });
