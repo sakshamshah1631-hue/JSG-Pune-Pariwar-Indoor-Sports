@@ -1,0 +1,5 @@
+- [x] Update `index.html` sports grid to use `icons/*.png` + add reveal/tilt hooks (reverted)
+- [x] Update `style.css` with scroll-reveal + tilt/magnetic hover + hero enhancements (reverted)
+- [x] Update `script.js` with IntersectionObserver reveal + tilt interaction (reverted)
+- [x] Sanity check: form logic still works (checkbox + age dropdown required/disabled)
+- [x] Optional: run local server / quick browser test

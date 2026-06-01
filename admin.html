@@ -2,35 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - JSG Pune</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <div id="login-section" class="admin-box">
-        <h2>Admin Login</h2>
-        <form id="loginForm">
-            <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
+        <div class="admin-card glass-card animate-scale">
+            <div class="admin-card__header">
+                <span class="admin-badge">Secure Access</span>
+                <h2>Admin Login</h2>
+                <p class="admin-subtitle">Access registrations, export data, and review member activity.</p>
+            </div>
+
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
     </div>
 
-    <div id="dashboard-section" style="display:none;" class="dashboard-box">
-        <h2>Registrations</h2>
-        <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
-            <button id="logoutBtn">Logout</button>
-            <button id="exportBtn" style="background: linear-gradient(135deg, #1E3A8A, #2563EB); color: white; padding: 12px 30px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; font-size: 1rem; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);">📥 Export to Excel</button>
+    <div id="dashboard-section" class="dashboard-box" style="display:none;">
+        <div class="dashboard-panel glass-card animate-scale">
+            <div class="dashboard-top">
+                <div>
+                    <h2>Admin Dashboard</h2>
+                    <p class="dashboard-note">Live view of current registrations and export tools.</p>
+                </div>
+                <div class="dashboard-actions">
+                    <button id="logoutBtn">Logout</button>
+                    <button id="exportBtn">🗄️ Backup Excel</button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span>Total</span>
+                    <strong id="totalCount">0</strong>
+                    <small>registrations</small>
+                </div>
+                <div class="stat-card">
+                    <span>Updated</span>
+                    <strong id="lastUpdated">—</strong>
+                    <small>refresh time</small>
+                </div>
+                <div class="stat-card">
+                    <span>Male</span>
+                    <strong id="maleCount">0</strong>
+                    <small>registrations</small>
+                </div>
+                <div class="stat-card">
+                    <span>Female</span>
+                    <strong id="femaleCount">0</strong>
+                    <small>registrations</small>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="table-header">
+                    <input id="searchInput" type="search" placeholder="Search registrations by name, mobile, gender or sport">
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Mobile</th>
+                            <th>Sports & Category</th>
+                        </tr>
+                    </thead>
+                    <tbody id="registrationTableBody"></tbody>
+                </table>
+            </div>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Mobile</th>
-                    <th>JSG Group</th>
-                </tr>
-            </thead>
-            <tbody id="registrationTableBody"></tbody>
-        </table>
     </div>
     <script src="/admin-script.js"></script>
 </body>

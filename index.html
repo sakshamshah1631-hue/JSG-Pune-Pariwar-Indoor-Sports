@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSG Pune Pariwar Indoor Games</title>
+    <title>JSG Pune Smart City Indoor Games</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="#home" class="logo-link">
-                    <span class="logo-text">JSG Pune Pariwar</span>
+                    <span class="logo-text">JSG Pune Smart City</span>
                 </a>
             </div>
             <div class="nav-menu" id="nav-menu">
@@ -34,12 +34,12 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1 class="hero-title">
-                JSG Pune Pariwar
+                JSG Pune Smart City
                 <br>
                 <span class="gold">Indoor Games Tournament</span>
             </h1>
             <p class="hero-subtitle">
-                Stay Tuned For More Updates
+                True Meaning Of Sportsmanship
             </p>
             <div class="hero-buttons">
                 <a href="#events" class="btn btn-primary btn-large">
@@ -55,14 +55,14 @@
 
             <div class="event-card">
                 <div class="event-date">
-                    <h3>12 July 2026</h3>
+                    <h3>21 June</h3>
                     <div class="venue">
-                        Metrocity Sports Club, Kothrud
+                        Venue - Nahata Sports Complex
                     </div>
                 </div>
 
                 <div class="event-sports">
-                    <h4>Select ANY 2 Sports:</h4>
+                    <h4>Select sports (choose any number of sports or select <strong>NO Sports</strong>):</h4>
                     <div class="sports-grid">
 
                         <label class="sport-item july12">
@@ -79,6 +79,15 @@
                                     <option value="26-39">26 to 39 years</option>
                                     <option value="40-55">40 to 55 years</option>
                                     <option value="56+">56 +</option>
+                                </select>
+                                <label>Select Name Type *</label>
+                                <select name="table_tennis_type">
+                                    <option value="" disabled selected>-- Choose Type --</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Male Double">Male Double</option>
+                                    <option value="Female Double">Female Double</option>
+                                    <option value="Mix Doubles">Mix Doubles</option>
                                 </select>
                             </div>
                         </label>
@@ -98,13 +107,22 @@
                                     <option value="40-55">40 to 55 years</option>
                                     <option value="56+">56 +</option>
                                 </select>
+                                <label>Select Name Type *</label>
+                                <select name="pickle_ball_type">
+                                    <option value="" disabled selected>-- Choose Type --</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Male Double">Male Double</option>
+                                    <option value="Female Double">Female Double</option>
+                                    <option value="Mix Doubles">Mix Doubles</option>
+                                </select>
                             </div>
                         </label>
 
                         <label class="sport-item july12">
                             <input type="checkbox" name="july12[]" value="Swimming">
                             <span style="color:#0ea5e9; font-weight:700; font-size:18px;">
-                                 🏊 Swimming
+                                🏊 Swimming
                             </span>
                             <div class="sport-age-group">
                                 <label>Select Age Category *</label>
@@ -116,30 +134,17 @@
                                     <option value="40-55">40 to 55 years</option>
                                     <option value="56+">56 +</option>
                                 </select>
+                                <label>Select Name Type *</label>
+                                <select name="swimming_type">
+                                    <option value="" disabled selected>-- Choose Type --</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
                             </div>
                         </label>
 
-                    </div>
-                    <div class="sport-count" id="july12-count">
-                        0/2 selected
-                    </div>
-                </div>
-            </div>
-
-            <div class="event-card">
-                <div class="event-date">
-                    <h3>19 July 2026</h3>
-                    <div class="venue">
-                        Downtown Sports Arena, Gangadham Kondhwa Road
-                    </div>
-                </div>
-
-                <div class="event-sports">
-                    <h4>Select ANY 2 Sports:</h4>
-                    <div class="sports-grid">
-
-                        <label class="sport-item july19">
-                            <input type="checkbox" name="july19[]" value="Badminton">
+                        <label class="sport-item july12">
+                            <input type="checkbox" name="july12[]" value="Badminton">
                             <span style="color:#f59e0b; font-weight:700; font-size:18px;">
                                 🏸 Badminton
                             </span>
@@ -153,11 +158,20 @@
                                     <option value="40-55">40 to 55 years</option>
                                     <option value="56+">56 +</option>
                                 </select>
+                                <label>Select Name Type *</label>
+                                <select name="badminton_type">
+                                    <option value="" disabled selected>-- Choose Type --</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Male Double">Male Double</option>
+                                    <option value="Female Double">Female Double</option>
+                                    <option value="Mix Doubles">Mix Doubles</option>
+                                </select>
                             </div>
                         </label>
 
-                        <label class="sport-item july19">
-                            <input type="checkbox" name="july19[]" value="Chess">
+                        <label class="sport-item july12">
+                            <input type="checkbox" name="july12[]" value="Chess">
                             <span style="color:#111827; font-weight:700; font-size:18px;">
                                 ♟ Chess
                             </span>
@@ -170,11 +184,17 @@
                                     <option value="26-39">26 to 39 years</option>
                                     <option value="40+">40 +</option>
                                 </select>
+                                <label>Select Name Type *</label>
+                                <select name="chess_type">
+                                    <option value="" disabled selected>-- Choose Type --</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
                             </div>
                         </label>
 
-                        <label class="sport-item july19">
-                            <input type="checkbox" name="july19[]" value="Carrom">
+                        <label class="sport-item july12">
+                            <input type="checkbox" name="july12[]" value="Carrom">
                             <span style="color:#dc2626; font-weight:700; font-size:18px;">
                                 🔴 Carrom
                             </span>
@@ -187,12 +207,25 @@
                                     <option value="26-39">26 to 39 years</option>
                                     <option value="40+">40 +</option>
                                 </select>
+                                <label>Select Name Type *</label>
+                                <select name="carrom_type">
+                                    <option value="" disabled selected>-- Choose Type --</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
                             </div>
                         </label>
 
+                        <label class="sport-item july12">
+                            <input type="checkbox" name="july12[]" value="No Sports" data-no-sports="true">
+                            <span style="color:#7c3aed; font-weight:700; font-size:18px;">
+                                ❌ NO Sports
+                            </span>
+                        </label>
+
                     </div>
-                    <div class="sport-count" id="july19-count">
-                        0/2 selected
+                    <div class="sport-count" id="july12-count">
+                        0 selected
                     </div>
                 </div>
             </div>
@@ -227,61 +260,7 @@
 
                         <div class="form-group">
                             <label>Mobile Number *</label>
-                            <input type="tel" name="mobile" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>City *</label>
-                            <input type="text" name="city" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>JSG Group Name *</label>
-                            <select name="jsgGroup" required>
-                                <option value="" disabled selected>Select your JSG Group</option>
-                                <option value="JSG DIAMOND PIMPRI-CHINCHWAD">JSG DIAMOND PIMPRI-CHINCHWAD</option>
-                                <option value="JSG PUNE AAGAM">JSG PUNE AAGAM</option>
-                                <option value="JSG PUNE ANAND">JSG PUNE ANAND</option>
-                                <option value="JSG PUNE ARHAM">JSG PUNE ARHAM</option>
-                                <option value="JSG PUNE BARAMATI">JSG PUNE BARAMATI</option>
-                                <option value="JSG PUNE BIBWEWADI">JSG PUNE BIBWEWADI</option>
-                                <option value="JSG PUNE CELEBRATION">JSG PUNE CELEBRATION</option>
-                                <option value="JSG PUNE CENTRAL">JSG PUNE CENTRAL</option>
-                                <option value="JSG PUNE CRYSTAL">JSG PUNE CRYSTAL</option>
-                                <option value="JSG PUNE DECCAN">JSG PUNE DECCAN</option>
-                                <option value="JSG PUNE DOWNTOWN">JSG PUNE DOWNTOWN</option>
-                                <option value="JSG PUNE ELITE">JSG PUNE ELITE</option>
-                                <option value="JSG PUNE GREATER">JSG PUNE GREATER</option>
-                                <option value="JSG PUNE ICON">JSG PUNE ICON</option>
-                                <option value="JSG PUNE INFINITY">JSG PUNE INFINITY</option>
-                                <option value="JSG PUNE JEWELS">JSG PUNE JEWELS</option>
-                                <option value="JSG PUNE LOTUS">JSG PUNE LOTUS</option>
-                                <option value="JSG PUNE MAIN">JSG PUNE MAIN</option>
-                                <option value="JSG PUNE MARKET YARD">JSG PUNE MARKET YARD</option>
-                                <option value="JSG PUNE METROCITY">JSG PUNE METROCITY</option>
-                                <option value="JSG PUNE MID TOWN">JSG PUNE MID TOWN</option>
-                                <option value="JSG PUNE NAVKAR">JSG PUNE NAVKAR</option>
-                                <option value="JSG PUNE NOBLE">JSG PUNE NOBLE</option>
-                                <option value="JSG PUNE PARSHWA">JSG PUNE PARSHWA</option>
-                                <option value="JSG PUNE PASCHIM">JSG PUNE PASCHIM</option>
-                                <option value="JSG PUNE PEARL">JSG PUNE PEARL</option>
-                                <option value="JSG PUNE PIMPRI-CHINCHWAD">JSG PUNE PIMPRI-CHINCHWAD</option>
-                                <option value="JSG PUNE PLATINUM">JSG PUNE PLATINUM</option>
-                                <option value="JSG PUNE PRIDE">JSG PUNE PRIDE</option>
-                                <option value="JSG PUNE PROFESSIONAL">JSG PUNE PROFESSIONAL</option>
-                                <option value="JSG PUNE ROYALS">JSG PUNE ROYALS</option>
-                                <option value="JSG PUNE SKY">JSG PUNE SKY</option>
-                                <option value="JSG PUNE SMART CITY">JSG PUNE SMART CITY</option>
-                                <option value="JSG PUNE SPARSH">JSG PUNE SPARSH</option>
-                                <option value="JSG PUNE SYNERGY">JSG PUNE SYNERGY</option>
-                                <option value="JSG PUNE UDAAN">JSG PUNE UDAAN</option>
-                                <option value="JSG PUNE YPC">JSG PUNE YPC</option>
-                                <option value="JSG SANGINI NARI SANGHATAN">JSG SANGINI NARI SANGHATAN</option>
-                                <option value="JSG YF BARAMATI">JSG YF BARAMATI</option>
-                                <option value="JSG YF METROELITE">JSG YF METROELITE</option>
-                                <option value="JSG YF PUNE DOWNTOWN">JSG YF PUNE DOWNTOWN</option>
-                                <option value="JSG YF PUNE SMART CITY">JSG YF PUNE SMART CITY</option>
-                            </select>
+                            <input type="number" name="mobile" required min="1000000000" max="9999999999" step="1" inputmode="numeric" title="Enter exactly 10 digits" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);">
                         </div>
 
                         <div class="form-group">
@@ -308,10 +287,10 @@
 
     <footer class="footer">
         <div class="container">
-            <p>© 2026 JSG Pune Pariwar Indoor Games Tournament. All Rights Reserved.</p>
+            <p>© 2026 JSG Pune Smart City Indoor Games Tournament. All Rights Reserved.</p>
             <div class="instagram-promo" style="margin-top: 15px; font-size: 1.1rem;">
                 <p>Stay tuned for more updates!</p>
-                <p>Follow us on Instagram: <a href="https://instagram.com/jsgpunepariwar" target="_blank" style="color: #FFD700; text-decoration: none; font-weight: 700;">@jsgpunepariwar</a></p>
+                <p>Follow us on Instagram: <a href="https://instagram.com/jsgpunesmartcity" target="_blank" style="color: #FFD700; text-decoration: none; font-weight: 700;">@jsgpunesmartcity</a></p>
             </div>
         </div>
     </footer>

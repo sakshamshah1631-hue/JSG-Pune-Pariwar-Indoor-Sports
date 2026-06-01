@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('registrationForm');
     const sportInputs = document.querySelectorAll('.sport-item input[type="checkbox"]');
     const july12Count = document.getElementById('july12-count');
-    const july19Count = document.getElementById('july19-count');
 
     // Handle Responsive Mobile Navbar Menu Toggle
     const hamburger = document.getElementById('hamburger');
@@ -14,81 +13,97 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Dynamic display calculator implementation
-    function updateSportCounts(className, displayElement) {
-        const checkedCount = document.querySelectorAll(`.${className} input[type="checkbox"]:checked`).length;
-        displayElement.textContent = `${checkedCount}/2 selected`;
+    function updateSportCounts() {
+        const noSportsChecked = document.querySelector('.july12 input[data-no-sports]')?.checked;
+        if (noSportsChecked) {
+            july12Count.textContent = 'No Sports selected';
+            return;
+        }
+        const checkedCount = document.querySelectorAll('.july12 input[type="checkbox"]:checked:not([data-no-sports])').length;
+        july12Count.textContent = `${checkedCount} selected`;
     }
 
     // Dynamic show/hide and setting submenus options to required
     sportInputs.forEach(input => {
         input.addEventListener('change', function () {
             const container = this.closest('.sport-item');
-            const isJuly12 = container.classList.contains('july12');
-            const currentGroup = isJuly12 ? 'july12' : 'july19';
-            const currentCounter = isJuly12 ? july12Count : july19Count;
-
+            const isNoSports = this.dataset.noSports === 'true';
             const ageGroupContainer = container.querySelector('.sport-age-group');
-            const ageSelect = ageGroupContainer.querySelector('select');
+            const selectFields = Array.from(ageGroupContainer?.querySelectorAll('select') || []);
+            const noSportsInput = document.querySelector('.july12 input[data-no-sports]');
+            const otherInputs = Array.from(document.querySelectorAll('.july12 input[type="checkbox"]:not([data-no-sports])'));
 
-            if (this.checked) {
-                ageGroupContainer.style.display = 'block';
-                ageSelect.required = true;
-            } else {
-                ageGroupContainer.style.display = 'none';
-                ageSelect.required = false;
-                ageSelect.value = ''; 
+            if (isNoSports && this.checked) {
+                otherInputs.forEach(otherInput => {
+                    const otherContainer = otherInput.closest('.sport-item');
+                    const otherAgeGroup = otherContainer.querySelector('.sport-age-group');
+                    const otherSelects = Array.from(otherAgeGroup.querySelectorAll('select'));
+                    otherInput.checked = false;
+                    otherInput.disabled = true;
+                    otherAgeGroup.style.display = 'none';
+                    otherSelects.forEach(select => {
+                        select.required = false;
+                        select.value = '';
+                    });
+                });
             }
 
-            const selectedInGroup = Array.from(document.querySelectorAll(`.${currentGroup} input[type="checkbox"]:checked`));
-            if (selectedInGroup.length > 2) {
-                const deselectInput = selectedInGroup[1];
-                deselectInput.checked = false;
-                const deselectContainer = deselectInput.closest('.sport-item');
-                const deselectAgeGroup = deselectContainer.querySelector('.sport-age-group');
-                const deselectAgeSelect = deselectAgeGroup.querySelector('select');
-                deselectAgeGroup.style.display = 'none';
-                deselectAgeSelect.required = false;
-                deselectAgeSelect.value = '';
+            if (!isNoSports && this.checked) {
+                if (noSportsInput) {
+                    noSportsInput.checked = false;
+                }
             }
 
-            updateSportCounts(currentGroup, currentCounter);
+            if (isNoSports && !this.checked) {
+                otherInputs.forEach(otherInput => {
+                    otherInput.disabled = false;
+                });
+            }
+
+            if (!isNoSports) {
+                if (this.checked) {
+                    ageGroupContainer.style.display = 'block';
+                    selectFields.forEach(select => select.required = true);
+                } else {
+                    ageGroupContainer.style.display = 'none';
+                    selectFields.forEach(select => {
+                        select.required = false;
+                        select.value = '';
+                    });
+                }
+            }
+
+            updateSportCounts();
         });
     });
 
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        const july12Sports = [];
-        const july19Sports = [];
+        const selectedSports = [];
 
-        // Collate and process nested array data values
         document.querySelectorAll('.july12 input[type="checkbox"]:checked').forEach(input => {
+            if (input.dataset.noSports === 'true') {
+                selectedSports.push({ sportName: input.value, ageCategory: 'N/A', type: 'N/A' });
+                return;
+            }
             const container = input.closest('.sport-item');
-            const ageGroup = container.querySelector('.sport-age-group select').value;
-            july12Sports.push({
-                sportName: input.value,
-                ageCategory: ageGroup
-            });
+            const selects = Array.from(container.querySelectorAll('.sport-age-group select'));
+            const ageGroup = selects[0]?.value || 'N/A';
+            const type = selects[1]?.value || 'N/A';
+            selectedSports.push({ sportName: input.value, ageCategory: ageGroup, type: type });
         });
 
-        document.querySelectorAll('.july19 input[type="checkbox"]:checked').forEach(input => {
-            const container = input.closest('.sport-item');
-            const ageGroup = container.querySelector('.sport-age-group select').value;
-            july19Sports.push({
-                sportName: input.value,
-                ageCategory: ageGroup
-            });
-        });
-
-        // Enforce maximum options limit boundaries
-        if (july12Sports.length > 2 || july19Sports.length > 2) {
-            alert('Maximum 2 sports allowed per date');
+        if (selectedSports.length === 0) {
+            alert('Please choose at least one sport, or select NO Sports.');
             return;
         }
 
-        // Validate that at least one sport has been configured
-        if (july12Sports.length === 0 && july19Sports.length === 0) {
-            alert('Selection of sports is mandatory for at least one of the dates.');
+        const mobile = form.mobile.value.trim();
+        const mobileValid = /^[0-9]{10}$/.test(mobile);
+        if (!mobileValid) {
+            alert('Please enter a valid 10-digit mobile number using numbers only.');
+            form.mobile.focus();
             return;
         }
 
@@ -96,13 +111,12 @@ document.addEventListener('DOMContentLoaded', function () {
             fullName: form.fullName.value,
             age: form.age.value,
             gender: form.gender.value,
-            mobile: form.mobile.value,
-            city: form.city.value,
-            jsgGroup: form.jsgGroup.value,
+            mobile: mobile,
+            city: 'N/A',
+            jsgGroup: 'N/A',
             emergencyContact: form.emergencyContact.value || 'N/A', 
             medicalConditions: form.medicalConditions.value || 'None',
-            july12Sports: july12Sports,
-            july19Sports: july19Sports
+            selectedSports: selectedSports
         };
 
         try {
