@@ -48,7 +48,8 @@ const registrationSchema = new mongoose.Schema({
     {
       sportName: String,
       ageCategory: String,
-      type: String
+      type: String,
+      partnerName: String
     }
   ],
 
@@ -56,7 +57,8 @@ const registrationSchema = new mongoose.Schema({
     {
       sportName: String,
       ageCategory: String,
-      type: String
+      type: String,
+      partnerName: String
     }
   ],
 
@@ -64,7 +66,8 @@ const registrationSchema = new mongoose.Schema({
     {
       sportName: String,
       ageCategory: String,
-      type: String
+      type: String,
+      partnerName: String
     }
   ],
 
@@ -229,7 +232,7 @@ app.get('/api/admin/export', async (req, res) => {
 
       const sportsSummary = selectedSportsArray.length
         ? selectedSportsArray
-            .map(s => `${s.sportName} (${s.ageCategory || 'N/A'}${s.type ? `, ${s.type}` : ''})`)
+            .map(s => `${s.sportName} (${s.ageCategory || 'N/A'}${s.type ? `, ${s.type}` : ''}${s.partnerName && s.partnerName !== 'N/A' ? `, Partner: ${s.partnerName}` : ''})`)
             .join(', ')
         : 'None';
 
@@ -328,7 +331,7 @@ async function createBackup() {
 
       const sportsSummary = selectedSportsArray.length
         ? selectedSportsArray
-            .map(s => `${s.sportName} (${s.ageCategory || 'N/A'}${s.type ? `, ${s.type}` : ''})`)
+            .map(s => `${s.sportName} (${s.ageCategory || 'N/A'}${s.type ? `, ${s.type}` : ''}${s.partnerName && s.partnerName !== 'N/A' ? `, Partner: ${s.partnerName}` : ''})`)
             .join(', ')
         : 'None';
 

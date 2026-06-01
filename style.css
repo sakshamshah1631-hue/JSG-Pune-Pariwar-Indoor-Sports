@@ -456,6 +456,37 @@ body {
     box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.2);
 }
 
+/* Partner Name Input Styling */
+.partner-name-container {
+    margin-top: 12px;
+}
+
+.partner-name-container label {
+    font-size: 0.85rem;
+    color: #1E3A8A;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.partner-name-container input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background: linear-gradient(135deg, #fffbf0 0%, white 100%);
+    color: #1E3A8A;
+    font-weight: 600;
+    font-family: inherit;
+}
+
+.partner-name-container input:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.2);
+}
+
 @keyframes slideDownFade {
     from { opacity: 0; transform: translateY(-8px); }
     to { opacity: 1; transform: translateY(0); }

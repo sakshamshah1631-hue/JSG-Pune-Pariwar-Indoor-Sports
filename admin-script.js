@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         return sports.length
-            ? sports.map((item) => `${item.sportName} (${item.ageCategory || 'N/A'}${item.type ? `, ${item.type}` : ''})`).join(', ')
+            ? sports.map((item) => `${item.sportName} (${item.ageCategory || 'N/A'}${item.type ? `, ${item.type}` : ''}${item.partnerName && item.partnerName !== 'N/A' ? `, Partner: ${item.partnerName}` : ''})`).join(', ')
             : '—';
     }
 
