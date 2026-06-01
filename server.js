@@ -232,7 +232,14 @@ app.get('/api/admin/export', async (req, res) => {
 
       const sportsSummary = selectedSportsArray.length
         ? selectedSportsArray
-            .map(s => `${s.sportName} (${s.ageCategory || 'N/A'}${s.type ? `, ${s.type}` : ''}${s.partnerName && s.partnerName !== 'N/A' ? `, Partner: ${s.partnerName}` : ''})`)
+            .map(s => {
+              const name = (s.sportName || '').toString();
+              if (name.toLowerCase() === 'only attending the event') return 'Only attending the event';
+              const parts = [`${s.ageCategory || 'N/A'}`];
+              if (s.type) parts.push(s.type);
+              if (s.partnerName && s.partnerName !== 'N/A') parts.push(`Partner: ${s.partnerName}`);
+              return `${name} (${parts.join(', ')})`;
+            })
             .join(', ')
         : 'None';
 
@@ -331,7 +338,14 @@ async function createBackup() {
 
       const sportsSummary = selectedSportsArray.length
         ? selectedSportsArray
-            .map(s => `${s.sportName} (${s.ageCategory || 'N/A'}${s.type ? `, ${s.type}` : ''}${s.partnerName && s.partnerName !== 'N/A' ? `, Partner: ${s.partnerName}` : ''})`)
+            .map(s => {
+              const name = (s.sportName || '').toString();
+              if (name.toLowerCase() === 'only attending the event') return 'Only attending the event';
+              const parts = [`${s.ageCategory || 'N/A'}`];
+              if (s.type) parts.push(s.type);
+              if (s.partnerName && s.partnerName !== 'N/A') parts.push(`Partner: ${s.partnerName}`);
+              return `${name} (${parts.join(', ')})`;
+            })
             .join(', ')
         : 'None';
 

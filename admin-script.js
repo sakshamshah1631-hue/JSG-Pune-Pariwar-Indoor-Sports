@@ -58,9 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
             ...(Array.isArray(reg.july19Sports) ? reg.july19Sports : [])
         ];
 
-        return sports.length
-            ? sports.map((item) => `${item.sportName} (${item.ageCategory || 'N/A'}${item.type ? `, ${item.type}` : ''}${item.partnerName && item.partnerName !== 'N/A' ? `, Partner: ${item.partnerName}` : ''})`).join(', ')
-            : '—';
+        if (!sports.length) return '—';
+
+        return sports.map((item) => {
+            const name = (item.sportName || '').toString();
+            if (name.toLowerCase() === 'only attending the event') return 'Only attending the event';
+            const parts = [item.ageCategory || 'N/A'];
+            if (item.type) parts.push(item.type);
+            if (item.partnerName && item.partnerName !== 'N/A') parts.push(`Partner: ${item.partnerName}`);
+            return `${name} (${parts.join(', ')})`;
+        }).join(', ');
     }
 
     function renderTable(filter = '') {

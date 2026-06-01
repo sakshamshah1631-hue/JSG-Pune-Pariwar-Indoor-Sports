@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateSportCounts() {
         const noSportsChecked = document.querySelector('.july12 input[data-no-sports]')?.checked;
         if (noSportsChecked) {
-            july12Count.textContent = 'No Sports selected';
+            july12Count.textContent = 'Only attending the event selected';
             return;
         }
         const checkedCount = document.querySelectorAll('.july12 input[type="checkbox"]:checked:not([data-no-sports])').length;
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (selectedSports.length === 0) {
-            alert('Please choose at least one sport, or select NO Sports.');
+            alert('Please choose at least one sport, or select Only attending the event.');
             return;
         }
 
