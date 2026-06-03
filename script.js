@@ -70,36 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         select.required = false;
                         select.value = '';
                     });
-                    // hide partner name field on uncheck
-                    const partnerContainer = ageGroupContainer.querySelector('.partner-name-container');
-                    if (partnerContainer) {
-                        partnerContainer.style.display = 'none';
-                        const partnerInput = partnerContainer.querySelector('input');
-                        if (partnerInput) partnerInput.value = '';
-                    }
                 }
-            }
-
-            // Handle type select changes for partner name visibility
-            const typeSelect = ageGroupContainer?.querySelector('select[name$="_type"]');
-            if (typeSelect) {
-                typeSelect.addEventListener('change', function() {
-                    const partnerContainer = ageGroupContainer.querySelector('.partner-name-container');
-                    const partnerInput = partnerContainer?.querySelector('input');
-                    if (!partnerContainer) return;
-                    
-                    const isDouble = this.value.includes('Double');
-                    if (isDouble && this.value) {
-                        partnerContainer.style.display = 'block';
-                        if (partnerInput) partnerInput.required = true;
-                    } else {
-                        partnerContainer.style.display = 'none';
-                        if (partnerInput) {
-                            partnerInput.required = false;
-                            partnerInput.value = '';
-                        }
-                    }
-                });
             }
 
             updateSportCounts();
@@ -113,22 +84,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.querySelectorAll('.july12 input[type="checkbox"]:checked').forEach(input => {
             if (input.dataset.noSports === 'true') {
-                selectedSports.push({ sportName: input.value, ageCategory: 'N/A', type: 'N/A', partnerName: 'N/A' });
+                selectedSports.push({ sportName: input.value, ageCategory: 'N/A' });
                 return;
             }
             const container = input.closest('.sport-item');
             const selects = Array.from(container.querySelectorAll('.sport-age-group select'));
             const ageGroup = selects[0]?.value || 'N/A';
-            const type = selects[1]?.value || 'N/A';
             
-            // Get partner name if it's a double
-            let partnerName = 'N/A';
-            if (type.includes('Double')) {
-                const partnerInput = container.querySelector('.partner-name-container input');
-                partnerName = partnerInput?.value?.trim() || 'N/A';
-            }
-            
-            selectedSports.push({ sportName: input.value, ageCategory: ageGroup, type: type, partnerName: partnerName });
+            selectedSports.push({ sportName: input.value, ageCategory: ageGroup });
         });
 
         if (selectedSports.length === 0) {

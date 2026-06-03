@@ -47,27 +47,21 @@ const registrationSchema = new mongoose.Schema({
   selectedSports: [
     {
       sportName: String,
-      ageCategory: String,
-      type: String,
-      partnerName: String
+      ageCategory: String
     }
   ],
 
   july12Sports: [
     {
       sportName: String,
-      ageCategory: String,
-      type: String,
-      partnerName: String
+      ageCategory: String
     }
   ],
 
   july19Sports: [
     {
       sportName: String,
-      ageCategory: String,
-      type: String,
-      partnerName: String
+      ageCategory: String
     }
   ],
 
@@ -235,10 +229,7 @@ app.get('/api/admin/export', async (req, res) => {
             .map(s => {
               const name = (s.sportName || '').toString();
               if (name.toLowerCase() === 'only attending the event') return 'Only attending the event';
-              const parts = [`${s.ageCategory || 'N/A'}`];
-              if (s.type) parts.push(s.type);
-              if (s.partnerName && s.partnerName !== 'N/A') parts.push(`Partner: ${s.partnerName}`);
-              return `${name} (${parts.join(', ')})`;
+              return `${name} (${s.ageCategory || 'N/A'})`;
             })
             .join(', ')
         : 'None';
@@ -341,10 +332,7 @@ async function createBackup() {
             .map(s => {
               const name = (s.sportName || '').toString();
               if (name.toLowerCase() === 'only attending the event') return 'Only attending the event';
-              const parts = [`${s.ageCategory || 'N/A'}`];
-              if (s.type) parts.push(s.type);
-              if (s.partnerName && s.partnerName !== 'N/A') parts.push(`Partner: ${s.partnerName}`);
-              return `${name} (${parts.join(', ')})`;
+              return `${name} (${s.ageCategory || 'N/A'})`;
             })
             .join(', ')
         : 'None';
