@@ -111,9 +111,9 @@ document.addEventListener('DOMContentLoaded', function () {
             fullName: form.fullName.value,
             age: form.age.value,
             gender: form.gender.value,
+            jsgGroup: form.jsgGroup.value,
             mobile: mobile,
             city: 'N/A',
-            jsgGroup: 'N/A',
             emergencyContact: form.emergencyContact.value || 'N/A', 
             medicalConditions: form.medicalConditions.value || 'None',
             selectedSports: selectedSports

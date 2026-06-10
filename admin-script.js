@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .filter((reg) => {
                 if (!normalizedFilter) return true;
                 const sportText = getSportSummary(reg).toLowerCase();
-                return [reg.fullName, reg.gender, reg.mobile, sportText]
+                return [reg.fullName, reg.gender, reg.jsgGroup, reg.mobile, sportText]
                     .filter(Boolean)
                     .some((value) => value.toLowerCase().includes(normalizedFilter));
             })
@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td data-label="#">${i + 1}</td>
                     <td data-label="Name">${reg.fullName || '—'}</td>
                     <td data-label="Gender">${reg.gender || '—'}</td>
+                    <td data-label="Group">${reg.jsgGroup || '—'}</td>
                     <td data-label="Mobile">${reg.mobile || '—'}</td>
                     <td data-label="Sports & Category">${getSportSummary(reg)}</td>
                 </tr>
