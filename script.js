@@ -2,6 +2,38 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('registrationForm');
     const sportInputs = document.querySelectorAll('.sport-item input[type="checkbox"]');
     const july12Count = document.getElementById('july12-count');
+    const registrationClosedModal = document.getElementById('registrationClosedModal');
+    const closeRegistrationClosedBtn = document.getElementById('closeRegistrationClosedBtn');
+    const registrationClosed = true;
+
+    function disableRegistrationForm() {
+        if (!form) return;
+        form.querySelectorAll('input, select, textarea, button').forEach(control => {
+            control.disabled = true;
+        });
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.innerHTML = '<span class="btn-text">Registration Closed</span>';
+        }
+    }
+
+    function showRegistrationClosedPopup() {
+        if (!registrationClosedModal) return;
+        registrationClosedModal.classList.add('open');
+        document.body.classList.add('modal-open');
+    }
+
+    if (registrationClosed) {
+        disableRegistrationForm();
+        showRegistrationClosedPopup();
+    }
+
+    if (closeRegistrationClosedBtn) {
+        closeRegistrationClosedBtn.addEventListener('click', () => {
+            registrationClosedModal.classList.remove('open');
+            document.body.classList.remove('modal-open');
+        });
+    }
 
     // Handle Responsive Mobile Navbar Menu Toggle
     const hamburger = document.getElementById('hamburger');
@@ -78,8 +110,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     form.addEventListener('submit', async function (e) {
-        e.preventDefault();
+        if (registrationClosed) {
+            e.preventDefault();
+            alert('Registration is closed and submissions are no longer accepted.');
+            return;
+        }
 
+        e.preventDefault();
         const selectedSports = [];
 
         document.querySelectorAll('.july12 input[type="checkbox"]:checked').forEach(input => {

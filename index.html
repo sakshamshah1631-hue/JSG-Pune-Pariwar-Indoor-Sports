@@ -31,6 +31,14 @@
         </div>
     </nav>
 
+    <div id="registrationClosedModal" class="modal-overlay">
+        <div class="modal-card">
+            <h2>Registration Closed</h2>
+            <p>Registration for the JSG Pune Smart City Indoor Games Tournament has now ended. We appreciate your interest — please stay tuned for future events.</p>
+            <button id="closeRegistrationClosedBtn" class="btn btn-primary">Close</button>
+        </div>
+    </div>
+
     <section id="home" class="hero">
         <div class="hero-content">
             <h1 class="hero-title">
@@ -66,7 +74,7 @@
                     <div class="sports-grid">
 
                         <label class="sport-item july12">
-                            <input type="checkbox" name="july12[]" value="Table Tennis">
+                            <input type="checkbox" name="july12[]" value="Table Tennis" disabled>
                             <span style="color:#2563eb; font-weight:700; font-size:18px;">
                                 🏓 Table Tennis
                             </span>
@@ -84,7 +92,7 @@
                         </label>
 
                         <label class="sport-item july12">
-                            <input type="checkbox" name="july12[]" value="Pickle Ball">
+                            <input type="checkbox" name="july12[]" value="Pickle Ball" disabled>
                             <span style="color:#16a34a; font-weight:700; font-size:18px;">
                                 🟢 Pickle Ball
                             </span>
@@ -102,7 +110,7 @@
                         </label>
 
                         <label class="sport-item july12">
-                            <input type="checkbox" name="july12[]" value="Swimming">
+                            <input type="checkbox" name="july12[]" value="Swimming" disabled>
                             <span style="color:#0ea5e9; font-weight:700; font-size:18px;">
                                 🏊 Swimming
                             </span>
@@ -121,7 +129,7 @@
                         </label>
 
                         <label class="sport-item july12">
-                            <input type="checkbox" name="july12[]" value="Badminton">
+                            <input type="checkbox" name="july12[]" value="Badminton" disabled>
                             <span style="color:#f59e0b; font-weight:700; font-size:18px;">
                                 🏸 Badminton
                             </span>
@@ -139,7 +147,7 @@
                         </label>
 
                         <label class="sport-item july12">
-                            <input type="checkbox" name="july12[]" value="Chess">
+                            <input type="checkbox" name="july12[]" value="Chess" disabled>
                             <span style="color:#111827; font-weight:700; font-size:18px;">
                                 ♟ Chess
                             </span>
@@ -156,7 +164,7 @@
                         </label>
 
                         <label class="sport-item july12">
-                            <input type="checkbox" name="july12[]" value="Carrom">
+                            <input type="checkbox" name="july12[]" value="Carrom" disabled>
                             <span style="color:#dc2626; font-weight:700; font-size:18px;">
                                 🔴 Carrom
                             </span>
@@ -173,7 +181,7 @@
                         </label>
 
                         <label class="sport-item july12">
-                            <input type="checkbox" name="july12[]" value="Only attending the event" data-no-sports="true">
+                            <input type="checkbox" name="july12[]" value="Only attending the event" data-no-sports="true" disabled>
                             <span style="color:#7c3aed; font-weight:700; font-size:18px;">
                                 ✅ Only attending the event
                             </span>
@@ -197,17 +205,17 @@
 
                         <div class="form-group">
                             <label>Full Name *</label>
-                            <input type="text" name="fullName" required>
+                            <input type="text" name="fullName" required disabled>
                         </div>
 
                         <div class="form-group">
                             <label>Age *</label>
-                            <input type="number" name="age" required>
+                            <input type="number" name="age" required disabled>
                         </div>
 
                         <div class="form-group">
                             <label>Gender *</label>
-                            <select name="gender" required>
+                            <select name="gender" required disabled>
                                 <option value="">Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -216,7 +224,7 @@
 
                         <div class="form-group">
                             <label>Group *</label>
-                            <select name="jsgGroup" required>
+                            <select name="jsgGroup" required disabled>
                                 <option value="">Select Group</option>
                                 <option value="Group A">Group A</option>
                                 <option value="Group B">Group B</option>
@@ -227,24 +235,24 @@
 
                         <div class="form-group">
                             <label>Mobile Number *</label>
-                            <input type="number" name="mobile" required min="1000000000" max="9999999999" step="1" inputmode="numeric" title="Enter exactly 10 digits" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);">
+                            <input type="number" name="mobile" required min="1000000000" max="9999999999" step="1" inputmode="numeric" title="Enter exactly 10 digits" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" disabled>
                         </div>
 
                         <div class="form-group">
                             <label>Emergency Contact (Optional)</label>
-                            <input type="tel" name="emergencyContact">
+                            <input type="tel" name="emergencyContact" disabled>
                         </div>
 
                         <div class="form-group full-width">
                             <label>Medical Conditions</label>
-                            <textarea name="medicalConditions" rows="3" placeholder="Optional"></textarea>
+                            <textarea name="medicalConditions" rows="3" placeholder="Optional" disabled></textarea>
                         </div>
 
                     </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary btn-large">
-                            <span class="btn-text">Register Now</span>
+                        <button type="submit" class="btn btn-primary btn-large" disabled>
+                            <span class="btn-text">Registration Closed</span>
                         </button>
                     </div>
                 </form>
